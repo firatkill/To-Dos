@@ -9,6 +9,7 @@ clearButton.onclick = clearTodos;
 list.onclick = listFunctions;
 addButton.addEventListener("click", (e) => {
   addTodoToUI(input.value);
+  addTodoToStorage(input.value);
 
   input.value = "";
   e.preventDefault();
@@ -25,7 +26,6 @@ function createTodo(todo) {
 function addTodoToUI(todo) {
   if (todo != "" && todo.length < 65) {
     list.innerHTML += `<li><p>${todo}</p><span><button class="edit">Edit</button><button class="delete">Delete</button></span></li>`;
-    addTodoToStorage(todo);
   } else if (todo == "") {
     showError("Todo must have a name.");
   } else if (todo.length > 64) {
