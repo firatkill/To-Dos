@@ -17,15 +17,20 @@
         <h1>To do app</h1>
         <form>
             <input placeholder="Add Todo" type="text">
-            <button type="submit">Add</button>
+            <button type="submit" id="addButton">Add</button>
         </form>
         <ul>
-            <li>Bring Vegetables <span><button>Edit</button><button>Delete</button></span></li>
-            <li>Feed Cat<span><button>Edit</button><button>Delete</button></span></li>
-            <li>Complete homework<span><button>Edit</button><button>Delete</button></span></li>
+            <li>Bring Vegetables <span><button class="edit">Edit</button><button class="delete">Delete</button></span>
+            </li>
+            <li>Feed Cat<span><button class="edit">Edit</button><button class="delete">Delete</button></span></li>
+            <li>Complete homework<span><button class="edit">Edit</button><button class="delete">Delete</button></span>
+            </li>
         </ul>
     </div>
     <!-- script tags -->
+
+    <script src="storage.js"></script>
+    <script src="ui.js"></script>
     <script src="app.js"></script>
 </body>
 
