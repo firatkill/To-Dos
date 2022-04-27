@@ -2,12 +2,14 @@ const form = document.querySelector("form");
 const input = document.querySelector("input");
 const addButton = document.querySelector("#addButton");
 const list = document.querySelector("ul");
+const clearButton = document.querySelector("#clear");
 
 document.addEventListener("DOMContentLoaded", loadAllTodosToUI());
-list.addEventListener("click", listFunctions());
+clearButton.onclick = clearTodos;
+list.onclick = listFunctions;
 addButton.addEventListener("click", (e) => {
   addTodoToUI(input.value);
-  addTodoToStorage(input.value);
+
   input.value = "";
   e.preventDefault();
 });
@@ -19,11 +21,11 @@ function loadAllTodosToUI() {
 }
 function createTodo(todo) {
   addTodoToUI(todo);
-  addTodoToStorage(todo);
 }
 function addTodoToUI(todo) {
   if (todo != "" && todo.length < 65) {
-    list.innerHTML += `<li>${todo}<span><button class="edit">Edit</button><button class="delete">Delete</button></span></li>`;
+    list.innerHTML += `<li><p>${todo}</p><span><button class="edit">Edit</button><button class="delete">Delete</button></span></li>`;
+    addTodoToStorage(todo);
   } else if (todo == "") {
     showError("Todo must have a name.");
   } else if (todo.length > 64) {
@@ -52,8 +54,22 @@ function showError(message) {
 
 function listFunctions(e) {
   if (e.target.className == "edit") {
-    console.log("clicked edit button");
+    editTodo();
   } else if (e.target.className == "delete") {
-    console.log("clicked delete button");
+    deleteTodoFromStorage(e.target.parentElement.previousSibling.textContent);
+    deleteTodoFromUI(e.target.parentElement.parentElement);
   }
+}
+function clearTodos() {
+  localStorage.removeItem("todos");
+  list.innerHTML = "";
+}
+function deleteTodoFromUI(todo) {
+  todo.remove();
+}
+function deleteTodoFromStorage(todo) {
+  let todos = getTodosFromLocalStorage();
+  let x = todos.indexOf(todo);
+  todos.splice(x, 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
