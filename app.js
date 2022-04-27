@@ -4,7 +4,7 @@ const addButton = document.querySelector("#addButton");
 const list = document.querySelector("ul");
 
 document.addEventListener("DOMContentLoaded", loadAllTodosToUI());
-
+list.addEventListener("click", listFunctions());
 addButton.addEventListener("click", (e) => {
   addTodoToUI(input.value);
   addTodoToStorage(input.value);
@@ -49,3 +49,11 @@ function showError(message) {
 }
 
 // <li>Complete homework<span><button class="edit">Edit</button><button class="delete">Delete</button></span></li>
+
+function listFunctions(e) {
+  if (e.target.className == "edit") {
+    console.log("clicked edit button");
+  } else if (e.target.className == "delete") {
+    console.log("clicked delete button");
+  }
+}
